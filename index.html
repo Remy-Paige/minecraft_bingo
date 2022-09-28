@@ -1,0 +1,84 @@
+<script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+</script>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<div id="app">
+    <div class="main_container">
+        <div class="bingo_square"><img v-on:click="click_square(0)" v-bind:src="images[0]" /> </div>
+        <div class="bingo_square"><img v-on:click="click_square(1)" v-bind:src="images[1]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(2)" v-bind:src="images[2]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(3)" v-bind:src="images[3]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(4)" v-bind:src="images[4]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(5)" v-bind:src="images[5]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(6)" v-bind:src="images[6]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(7)" v-bind:src="images[7]" /> </div>
+        <div class="bingo_square"><img v-on:click="click_square(8)" v-bind:src="images[8]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(9)" v-bind:src="images[9]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(10)" v-bind:src="images[10]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(11)" v-bind:src="images[11]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(12)" v-bind:src="images[12]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(13)" v-bind:src="images[13]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(14)" v-bind:src="images[14]" /> </div>
+        <div class="bingo_square"><img v-on:click="click_square(15)" v-bind:src="images[15]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(16)" v-bind:src="images[16]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(17)" v-bind:src="images[17]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(18)" v-bind:src="images[18]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(19)" v-bind:src="images[19]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(20)" v-bind:src="images[20]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(21)" v-bind:src="images[21]" /> </div>
+        <div class="bingo_square"><img v-on:click="click_square(22)" v-bind:src="images[22]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(23)" v-bind:src="images[23]" /></div>
+        <div class="bingo_square"><img v-on:click="click_square(24)" v-bind:src="images[24]" /></div>
+    </div>
+    <button @click="create_bingo_card">create_bingo_card</button>
+</div>
+
+  
+<script type="module">
+    import { createApp } from 'vue'
+
+    createApp({
+      data() {
+        return {
+            start_image: 'images/items/o.png',
+            master_image_arr: [
+            'images/items/11.png', 'images/items/12.png', 'images/items/13.png', 'images/items/14.png', 'images/items/15.png',
+            'images/items/21.png', 'images/items/22.png', 'images/items/23.png', 'images/items/24.png', 'images/items/25.png',
+            'images/items/31.png', 'images/items/32.png', 'images/items/33.png', 'images/items/34.png', 'images/items/35.png',
+            'images/items/41.png', 'images/items/42.png', 'images/items/43.png', 'images/items/44.png', 'images/items/45.png',
+            'images/items/51.png', 'images/items/52.png', 'images/items/53.png', 'images/items/54.png', 'images/items/55.png'],
+            images: [
+            'images/items/o.png', 'images/items/o.png', 'images/items/o.png', 'images/items/o.png', 'images/items/o.png',
+            'images/items/o.png', 'images/items/o.png', 'images/items/o.png', 'images/items/o.png', 'images/items/o.png',
+            'images/items/o.png', 'images/items/o.png', 'images/items/o.png', 'images/items/o.png', 'images/items/o.png',
+            'images/items/o.png', 'images/items/o.png', 'images/items/o.png', 'images/items/o.png', 'images/items/o.png',
+            'images/items/o.png', 'images/items/o.png', 'images/items/o.png', 'images/items/o.png', 'images/items/o.png'],
+        }
+      },
+      methods: {
+        create_bingo_card() {
+            console.log(this.master_image_arr)
+            var temp_master_image_arr = [].concat(this.master_image_arr)
+            for (let i = 0; i < 26; i++) {
+                var randomIndex = Math.floor(Math.random() * temp_master_image_arr.length);
+                this.images[i] = temp_master_image_arr.splice(randomIndex, 1)[0];
+            }
+            console.log(this.master_image_arr)
+        },
+        click_square(index) {
+            if (this.images[index].slice(15,) === '.png') {
+                this.images[index] = this.images[index].slice(0,15) + 'x.png'
+            } else {
+                this.images[index] = this.images[index].slice(0,15) + '.png'
+            }
+        }
+      }
+      
+    }).mount('#app')
+</script>
